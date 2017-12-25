@@ -77,7 +77,7 @@ class Scraping(object):
 
         initial_url = self.url + self.user_id
         page_html = requests.get(initial_url).content
-        soup = BeautifulSoup(page_html)
+        soup = BeautifulSoup(page_html, 'lxml')
 
         raw_shelf_names = soup('div', id='paginatedShelfList')[0].find_all('div', class_="userShelf")
 
