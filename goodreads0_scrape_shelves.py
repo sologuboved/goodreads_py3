@@ -62,7 +62,7 @@ class Scraping(object):
         num_shelves = len(shelf_names)
         index = 1
         for shelf_name in shelf_names:
-            print "(% r of %r)" % (index, num_shelves), "Starting shelf", '"' + shelf_name + '":',
+            print("(% r of %r)" % (index, num_shelves), "Starting shelf", '"' + shelf_name + '":', end=' ')
             index += 1
             shelf_url = self.generate_shelf_url(shelf_name)
             shelves[shelf_name] = self.scrape_shelf(shelf_url)
@@ -99,7 +99,7 @@ class Scraping(object):
             page_of_shelf = self.scrape_page_of_shelf(page_url)
             if not page_of_shelf:
                 # prettyprint_list_of_dicts(shelf)
-                print len(shelf), 'books'
+                print(len(shelf), 'books')
                 return shelf
             shelf.extend(page_of_shelf)
             page_num += 1
@@ -153,7 +153,7 @@ class Scraping(object):
         return book
 
     def dump_shelves(self):
-        print "Dumping shelves..."
+        print("Dumping shelves...")
         dump_json(self.shelves, self.shelves_json)
 
 
