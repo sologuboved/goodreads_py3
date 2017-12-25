@@ -115,7 +115,7 @@ class Scraping(object):
         """
         page_of_shelf = list()
         page_html = requests.get(page_url).content
-        soup = BeautifulSoup(page_html)
+        soup = BeautifulSoup(page_html, 'lxml')
 
         # We are looking for the contents of the tag tbody with the unique id booksBody
         tbody = soup('tbody', id='booksBody')
