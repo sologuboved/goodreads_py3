@@ -32,8 +32,6 @@ class GoodreadsBooks(object):
                 print()
             for raw_book in self.shelves[shelf]:
                 book = {rubric: raw_book[rubric] for rubric in raw_book}
-                rating = book[MY_RATING]
-                book[MY_RATING] = RATINGS.get(rating, MISSING_DATUM[0])
                 book_key = book[AUTHOR] + ' -- ' + book[TITLE]
                 if self.printer_on:
                     print(book_key, end=' ')

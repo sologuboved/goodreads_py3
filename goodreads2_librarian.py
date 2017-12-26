@@ -40,13 +40,7 @@ class Librarian(object):
         :param raw_rating: str
         :return: float or str
         """
-        rating_converter = {"it was amazing": 5.0,
-                            "really liked it": 4.0,
-                            "liked it": 3.0,
-                            "it was ok": 2.0,
-                            "did not like it": 1.0,
-                            }
-        return rating_converter.get(raw_rating, MISSING_DATUM[0])
+        return RATINGS.get(raw_rating, MISSING_DATUM[0])
 
     @staticmethod
     def convert_date(raw_date):

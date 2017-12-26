@@ -49,3 +49,9 @@ SPEED = 'speed'
 READ = 'read'
 CURRENTLY_READING = 'currently-reading'
 TO_READ = 'to-read'
+
+RATINGS = {"it was amazing": 5.0,
+           "really liked it": 4.0,
+           "liked it": 3.0,
+           "it was ok": 2.0,
+           "did not like it": 1.0}
