@@ -38,8 +38,7 @@ RUBRICS = [TITLE,
            DATE_STARTED,
            DATE_READ,
            DATE_ADDED,
-           SHELVES
-           ]
+           SHELVES]
 
 MISSING_DATUM = (None, 'not set', 'unknown')
 

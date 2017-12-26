@@ -15,6 +15,10 @@ def dump_json(entries, json_file):
         json.dump(entries, handler)
 
 
+def print_scraped_rubrics(cells):
+    print(cells)
+
+
 def prettyprint_allotment(allotment, num_books=None, only_meaningful=None):
     if type(allotment) is dict:
         prettyprint_grouped_allotment(allotment, num_books, only_meaningful)
@@ -53,7 +57,7 @@ def prettyprint_ungrouped_allotment(allotment, num_books=None, only_meaningful=N
             print()
 
 
-def prettyprint_book(book):
+def prettyprint_book(book, with_shelves=True):
     for rubric in RUBRICS[: -1]:
         print(rubric + ':', book[rubric])
 
@@ -77,10 +81,11 @@ def prettyprint_book(book):
     except KeyError:
         pass
 
-    print('shelves:')
-    for shelf_name in book[SHELVES]:
-        print("         ", shelf_name)
-    print()
+    if with_shelves:
+        print('shelves:')
+        for shelf_name in book[SHELVES]:
+            print("         ", shelf_name)
+        print()
 
 
 def deep_copy(multi):

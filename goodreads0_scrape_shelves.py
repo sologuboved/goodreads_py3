@@ -139,7 +139,7 @@ class Scraping(object):
         book = dict()
         for cell in cells:
             class_entry = cell.get('class')[1]  # e.g. <td class="field title"> --> ['field', 'title'][1]
-            if class_entry in RUBRICS:
+            if class_entry in RUBRICS[: -1]:  # except SHELVES
                 if class_entry == DATE_STARTED or class_entry == DATE_READ:
                     val_index = 4
                 elif class_entry == MY_RATING:
@@ -150,6 +150,7 @@ class Scraping(object):
                 if val == '':
                     val = MISSING_DATUM[0]
                 book[class_entry] = val
+        book[SHELVES] = list()
         return book
 
     def dump_shelves(self):
