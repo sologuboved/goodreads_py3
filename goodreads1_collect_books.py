@@ -32,6 +32,8 @@ class GoodreadsBooks(object):
                 print()
             for raw_book in self.shelves[shelf]:
                 book = {rubric: raw_book[rubric] for rubric in raw_book}
+                rating = book[MY_RATING]
+                book[MY_RATING] = RATINGS.get(rating, MISSING_DATUM[0])
                 book_key = book[AUTHOR] + ' -- ' + book[TITLE]
                 if self.printer_on:
                     print(book_key, end=' ')
@@ -49,7 +51,9 @@ class GoodreadsBooks(object):
                 if self.printer_on:
                     print()
                     print()
-        books = books.values()
+                # prettyprint_book(book, with_shelves=False)
+                # print()
+        books = list(books.values())
         return books
 
     def dump_books_and_shelf_names(self):
@@ -58,6 +62,8 @@ class GoodreadsBooks(object):
 
 
 if __name__ == '__main__':
-    GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=True)
-    # GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON).dump_books_and_shelf_names()
+    pass
+    # GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=True)
+    # books = GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=False).books
+    GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=False).dump_books_and_shelf_names()
     # GoodreadsBooks(A_SHELVES_JSON, A_BOOKS_JSON, A_SHELF_NAMES_JSON).dump_books_and_shelf_names()
