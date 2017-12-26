@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import html
 import requests
 from bs4 import BeautifulSoup
 from basic_operations import *
@@ -149,7 +150,10 @@ class Scraping(object):
                 val = self.find_vals(str(cell))[val_index].strip()
                 if val == '':
                     val = MISSING_DATUM[0]
-                book[class_entry] = val
+                try:
+                    book[class_entry] = html.unescape(val)
+                except TypeError:
+                    book[class_entry] = val
         book[SHELVES] = list()
         return book
 
@@ -159,7 +163,7 @@ class Scraping(object):
 
 
 if __name__ == '__main__':
-    Scraping(URL, MY_ID, SHELF_INSERT, MY_SHELVES_JSON)
+    # Scraping(URL, MY_ID, SHELF_INSERT, MY_SHELVES_JSON)
     # Scraping(URL, A_ID, SHELF_INSERT, A_SHELVES_JSON)
-    # Scraping(URL, MY_ID, SHELF_INSERT, MY_SHELVES_JSON).dump_shelves()
+    Scraping(URL, MY_ID, SHELF_INSERT, MY_SHELVES_JSON).dump_shelves()
     # Scraping(URL, A_ID, SHELF_INSERT, A_SHELVES_JSON).dump_shelves()
