@@ -58,9 +58,9 @@ def scrape_book(row):
     cells = row.find_all('td')
     book = dict()
     for cell in cells:
-        # print(cell)
-        # print()
-        # print()
+        print(cell)
+        print()
+        print()
         class_entry = cell.get('class')[1]  # e.g. <td class="field title"> --> ['field', 'title'][1]
         if class_entry in RUBRICS[: -1]:  # except SHELVES
             if class_entry == DATE_STARTED or class_entry == DATE_READ:
