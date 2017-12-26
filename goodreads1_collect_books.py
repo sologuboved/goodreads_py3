@@ -49,13 +49,13 @@ class GoodreadsBooks(object):
                 if self.printer_on:
                     print()
                     print()
-                # prettyprint_book(book, with_shelves=False)
-                # print()
         books = list(books.values())
         return books
 
     def dump_books_and_shelf_names(self):
+        print("Dumping books...")
         dump_json(self.books, self.books_json)
+        print("Dumping shelf names...")
         dump_json(self.shelf_names, self.shelf_names_json)
 
 
