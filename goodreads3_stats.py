@@ -23,8 +23,9 @@ class Stats(Librarian):
             return
         for arg in args:
             rubric, start, finish = arg
-            self.allotment = filter(lambda book: type(book[rubric] is float), self.allotment)
-            self.allotment = filter(lambda book: start <= book[rubric] <= finish, self.allotment)
+            self.allotment = filter(lambda book: type(book[rubric]) is float and book[rubric] is not None,
+                                    self.allotment)
+            self.allotment = list(filter(lambda book: start <= book[rubric] <= finish, self.allotment))
 
     def filter_by_date(self, *args):
         if not args:
@@ -32,7 +33,7 @@ class Stats(Librarian):
         for arg in args:
             rubric, start, finish = arg
             self.allotment = filter(lambda book: type(book[rubric]) is datetime.date, self.allotment)
-            self.allotment = filter(lambda book: start <= book[rubric].year <= finish, self.allotment)
+            self.allotment = list(filter(lambda book: start <= book[rubric].year <= finish, self.allotment))
 
     def filter_by_shelves(self, incl_and=(), incl_or=(), excl=(), by_shelf=False):
         assert type(incl_and) is tuple and type(incl_or) is tuple and type(excl) is tuple, "wrong type of argument"
@@ -71,11 +72,11 @@ class Stats(Librarian):
             return
 
         if incl_and:
-            self.allotment = filter(lambda b: set(incl_and).issubset(b[SHELVES]), self.allotment)
+            self.allotment = list(filter(lambda b: set(incl_and).issubset(b[SHELVES]), self.allotment))
         elif incl_or:
-            self.allotment = filter(lambda b: set(incl_or).intersection(b[SHELVES]), self.allotment)
+            self.allotment = list(filter(lambda b: set(incl_or).intersection(b[SHELVES]), self.allotment))
         elif excl:
-            self.allotment = filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment)
+            self.allotment = list(filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment))
 
     def find_mean_per_shelf(self, rubric, alpha=False, large_to_small=True):
         assert self.grouped, "Shelved library is empty"
