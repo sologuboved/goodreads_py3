@@ -91,9 +91,12 @@ class Stats(Librarian):
         if by_shelf:
             assert self.grouped, "Shelved library is empty"
             for shelf_name in self.grouped:
+                self.grouped[shelf_name] = list(filter(lambda book: type(book[rubric]) is float,
+                                                       self.grouped[shelf_name]))
                 sort_books(self.grouped[shelf_name], rubric, large_to_small)
             prettyprint_allotment(self.grouped, num_books, rubric)
         else:
+            self.allotment = list(filter(lambda book: type(book[rubric]) is float, self.allotment))
             sort_books(self.allotment, rubric, large_to_small)
             prettyprint_allotment(self.allotment, num_books, rubric)
 

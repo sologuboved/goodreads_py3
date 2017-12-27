@@ -12,7 +12,7 @@ Filtering:
 # stats.filter_by_range((NUM_PAGES, 200, 300), (NUM_RATINGS, 1000, float('inf')))
 # stats.filter_by_date((DATE_STARTED, 2016, 2016), (DATE_READ, 2017, 2017))
 
-# stats.filter_by_shelves(by_shelf=True)
+stats.filter_by_shelves(by_shelf=True)
 
 # to_excl = tuple(set(MY_SHELF_NAMES) - {READ, PHILOSOPHY, POETICS_AND_LINGUISTICS, DEIGMA})
 # stats.filter_by_shelves(excl=to_excl, by_shelf=True)
@@ -34,7 +34,7 @@ Calculations:
 
 # print(find_mean(stats.allotment, NUM_PAGES))
 # stats.find_mean_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
-# stats.find_est_books(rubric=TIME_GAP, large_to_small=True, num_books=10, by_shelf=False)
+# stats.find_est_books(rubric=TIME_GAP, large_to_small=True, num_books=10, by_shelf=True)
 # print("Variance", find_variance(stats.allotment, NUM_PAGES))
 # print("Standard Deviation", find_sd(stats.allotment, NUM_PAGES))
 # stats.find_variance_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
