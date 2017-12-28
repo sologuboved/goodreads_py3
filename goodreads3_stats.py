@@ -47,42 +47,6 @@ class Stats(Librarian):
             self.allotment = list(filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment))
         self.fill_in_grouped()
 
-    # def fill_in_grouped(self, incl_and=(), incl_or=(), excl=(), by_shelf=False):
-    #     assert type(incl_and) is tuple and type(incl_or) is tuple and type(excl) is tuple, "wrong type of argument"
-    #
-    #     if by_shelf:
-    #
-    #         if incl_and:
-    #             self.grouped = {shelf: list() for shelf in incl_and}
-    #             for book in self.allotment:
-    #                 if set(incl_and).issubset(book[SHELVES]):
-    #                     for shelf_name in incl_and:
-    #                         self.grouped[shelf_name].append(book)
-    #             return
-    #
-    #         if incl_or:
-    #             self.grouped = {shelf_name: list() for shelf_name in incl_or}
-    #             for book in self.allotment:
-    #                 for shelf_name in book[SHELVES]:
-    #                     if shelf_name in incl_or:
-    #                         self.grouped[shelf_name].append(book)
-    #             return
-    #
-    #         if excl:
-    #             for book in self.allotment:
-    #                 if not set(excl).intersection(set(book[SHELVES])):
-    #                     for shelf_name in book[SHELVES]:
-    #                         val = self.grouped.get(shelf_name, list())
-    #                         val.append(book)
-    #                         self.grouped[shelf_name] = val
-    #             return
-    #
-    #         self.grouped = {shelf_name: list() for shelf_name in self.shelf_names}
-    #         for book in self.allotment:
-    #             for shelf_name in book[SHELVES]:
-    #                 self.grouped[shelf_name].append(book)
-    #         return
-
     def fill_in_grouped(self):
         self.grouped = dict()
         for book in self.allotment:
@@ -106,7 +70,7 @@ class Stats(Librarian):
         print()
         return means
 
-    def find_est_books(self, rubric, large_to_small=True, num_books=5, by_shelf=False):
+    def find_est_books(self, rubric, large_to_small=True, num_books=None, by_shelf=False):
         print("\nBooks by %s:\n" % rubric)
         if by_shelf:
             assert self.grouped, "Shelved allotment is empty"

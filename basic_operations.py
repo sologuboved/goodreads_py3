@@ -19,7 +19,7 @@ def print_scraped_rubrics(cells):
     print(cells)
 
 
-def prettyprint_allotment(allotment, num_books=None, only_meaningful=None):
+def prettyprint_allotment(allotment, num_books=None, only_meaningful=False):
     if type(allotment) is dict:
         prettyprint_grouped_allotment(allotment, num_books, only_meaningful)
     elif type(allotment) is list:
@@ -28,7 +28,7 @@ def prettyprint_allotment(allotment, num_books=None, only_meaningful=None):
         "Wrong type of allotment, prettyprinter is broken"
 
 
-def prettyprint_grouped_allotment(grouped_allotment, num_books=None, only_meaningful=None):
+def prettyprint_grouped_allotment(grouped_allotment, num_books=None, only_meaningful=False):
     for key in grouped_allotment:
         print(" ---------", key, '---------')
         print()
@@ -36,7 +36,7 @@ def prettyprint_grouped_allotment(grouped_allotment, num_books=None, only_meanin
         print()
 
 
-def prettyprint_ungrouped_allotment(allotment, num_books=None, only_meaningful=None):
+def prettyprint_ungrouped_allotment(allotment, num_books=None, only_meaningful=False):
     if not num_books:
         num_books = len(allotment)
 
