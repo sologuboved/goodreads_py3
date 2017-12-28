@@ -10,9 +10,9 @@ Filtering:
 """
 
 # stats.filter_by_range((NUM_PAGES, 200, 300), (NUM_RATINGS, 1000, float('inf')))
-# stats.filter_by_date((DATE_STARTED, 2016, 2016), (DATE_READ, 2017, 2017))
-
-stats.filter_by_shelves(by_shelf=True)
+# stats.filter_by_date((DATE_STARTED, 2016, 2017), (DATE_READ, 2017, 2017))
+#
+# stats.filter_by_shelves(by_shelf=True)
 
 # to_excl = tuple(set(MY_SHELF_NAMES) - {READ, PHILOSOPHY, POETICS_AND_LINGUISTICS, DEIGMA})
 # stats.filter_by_shelves(excl=to_excl, by_shelf=True)

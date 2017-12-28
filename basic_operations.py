@@ -109,12 +109,12 @@ def update_book_shelves(json_file, title, upd_shelves):
     # Change the contents of shelves rubric in the json file
     assert type(upd_shelves) is list, "upd_shelves must be of type list"
     library = load_json(json_file)
-    print("Loaded library")
+    print("Loaded allotment")
     for book in library:
         if book[TITLE] == title:
             book[SHELVES] = upd_shelves[:]
             dump_json(library, json_file)
-            print("Dumped updated library")
+            print("Dumped updated allotment")
             return
     print(title, 'not found!')
 

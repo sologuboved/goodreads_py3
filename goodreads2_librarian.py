@@ -7,7 +7,7 @@ from basic_operations import *
 class Librarian(object):
     def __init__(self, books_json, shelf_names_json):
         self.errors = set()  # from self.process_books
-        self.library = self.process_books(load_json(books_json))
+        self.allotment = self.process_books(load_json(books_json))
         self.shelf_names = load_json(shelf_names_json)
         print("Errors:")
         if self.errors:
@@ -66,7 +66,7 @@ class Librarian(object):
         :param title: str
         :return: None
         """
-        for book in self.library:
+        for book in self.allotment:
             if book[TITLE] == title:
                 prettyprint_book(book)
                 break
@@ -91,7 +91,7 @@ class Librarian(object):
         :return: list (of dicts)
         """
         try:
-            shelf = [book for book in self.library if shelf_name in book[SHELVES]]
+            shelf = [book for book in self.allotment if shelf_name in book[SHELVES]]
         except KeyError as e:
             print('Book', '"' + book[TITLE] + '"', "doesn't have key", e)
             return
@@ -122,7 +122,7 @@ class Librarian(object):
         Print out books that are not placed at any shelf except READ, CURRENTLY_READING, or TO_READ
         :return: None
         """
-        unshelved = [book for book in self.library if len(book[SHELVES]) == 1]
+        unshelved = [book for book in self.allotment if len(book[SHELVES]) == 1]
         if unshelved:
             prettyprint_allotment(unshelved)
         else:
@@ -133,9 +133,9 @@ if __name__ == '__main__':
     # title = u"The Wise King: A Christian Prince, Muslim Spain, and the Birth of the Renaissance"
     good_librarian = Librarian(MY_BOOKS_JSON, MY_SHELF_NAMES_JSON)
     # good_librarian.find_book(title)
-    # print len(good_librarian.library)
+    # print len(good_librarian.allotment)
     # print load_json(MY_BOOKS_JSON)[19]
     # good_librarian = Librarian(A_BOOKS_JSON, A_SHELF_NAMES_JSON)
-    # print len(good_librarian.library)
+    # print len(good_librarian.allotment)
     # print load_json(A_BOOKS_JSON)[19]
     good_librarian.find_unshelved_books()

@@ -39,7 +39,7 @@ class GoodreadsBooks(object):
                 if readymade_entry:
                     readymade_entry[SHELVES].append(shelf)
                     if self.printer_on:
-                        print("is in the library")
+                        print("is in the allotment")
                         print(books[book_key][SHELVES])
                 else:
                     book[SHELVES] = [shelf]

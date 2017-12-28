@@ -10,11 +10,10 @@ class Stats(Librarian):
     def __init__(self, books_json, shelf_names_json):
         super(Stats, self).__init__(books_json, shelf_names_json)
         self.time_books()
-        self.allotment = deep_copy(self.library)
         self.grouped = dict()
 
     def time_books(self):
-        for book in self.library:
+        for book in self.allotment:
             book[TIME_DELTA], book[TIME_GAP] = find_time(book)
             book[SPEED] = find_book_speed(book, rounded=True)
 
@@ -23,8 +22,7 @@ class Stats(Librarian):
             return
         for arg in args:
             rubric, start, finish = arg
-            self.allotment = filter(lambda book: type(book[rubric]) is float and book[rubric] is not None,
-                                    self.allotment)
+            self.allotment = filter(lambda book: type(book[rubric]) is float, self.allotment)
             self.allotment = list(filter(lambda book: start <= book[rubric] <= finish, self.allotment))
 
     def filter_by_date(self, *args):
@@ -79,7 +77,7 @@ class Stats(Librarian):
             self.allotment = list(filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment))
 
     def find_mean_per_shelf(self, rubric, alpha=False, large_to_small=True):
-        assert self.grouped, "Shelved library is empty"
+        assert self.grouped, "Shelved allotment is empty"
         means = {shelf_name: find_mean(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
         print('\nMean:\n')
         print_sorted_res(means, alpha, large_to_small)
@@ -89,7 +87,7 @@ class Stats(Librarian):
     def find_est_books(self, rubric, large_to_small=True, num_books=5, by_shelf=False):
         print("\nBooks by %s:\n" % rubric)
         if by_shelf:
-            assert self.grouped, "Shelved library is empty"
+            assert self.grouped, "Shelved allotment is empty"
             for shelf_name in self.grouped:
                 self.grouped[shelf_name] = list(filter(lambda book: type(book[rubric]) is float,
                                                        self.grouped[shelf_name]))
@@ -101,7 +99,7 @@ class Stats(Librarian):
             prettyprint_allotment(self.allotment, num_books, rubric)
 
     def find_variance_per_shelf(self, rubric, alpha=False, large_to_small=True):
-        assert self.grouped, "Shelved library is empty"
+        assert self.grouped, "Shelved allotment is empty"
         variances = {shelf_name: find_variance(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
         print('\nVariance:\n')
         print_sorted_res(variances, alpha, large_to_small)
@@ -109,7 +107,7 @@ class Stats(Librarian):
         return variances
 
     def find_sd_per_shelf(self, rubric, alpha=False, large_to_small=True):
-        assert self.grouped, "Shelved library is empty"
+        assert self.grouped, "Shelved allotment is empty"
         sds = {shelf_name: find_sd(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
         print("\nStandard Deviation:\n")
         print_sorted_res(sds, alpha, large_to_small)
