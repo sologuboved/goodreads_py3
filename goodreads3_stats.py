@@ -11,12 +11,13 @@ class Stats(Librarian):
         super(Stats, self).__init__(books_json, shelf_names_json)
         self.time_books()
         self.grouped = dict()
-        self.filter_by_shelves()
+        self.fill_in_grouped()
 
     def time_books(self):
         for book in self.allotment:
             book[TIME_DELTA], book[TIME_GAP] = find_time(book)
             book[SPEED] = find_book_speed(book, rounded=True)
+        self.fill_in_grouped()
 
     def filter_by_range(self, *args):
         if not args:
@@ -25,6 +26,7 @@ class Stats(Librarian):
             rubric, start, finish = arg
             self.allotment = filter(lambda book: type(book[rubric]) is float, self.allotment)
             self.allotment = list(filter(lambda book: start <= book[rubric] <= finish, self.allotment))
+        self.fill_in_grouped()
 
     def filter_by_date(self, *args):
         if not args:
@@ -33,49 +35,63 @@ class Stats(Librarian):
             rubric, start, finish = arg
             self.allotment = filter(lambda book: type(book[rubric]) is datetime.date, self.allotment)
             self.allotment = list(filter(lambda book: start <= book[rubric].year <= finish, self.allotment))
+        self.fill_in_grouped()
 
-    def filter_by_shelves(self, incl_and=(), incl_or=(), excl=(), by_shelf=False):
+    def filter_by_shelves(self, incl_and=(), incl_or=(), excl=()):
         assert type(incl_and) is tuple and type(incl_or) is tuple and type(excl) is tuple, "wrong type of argument"
-
-        if by_shelf:
-
-            if incl_and:
-                self.grouped = {shelf: list() for shelf in incl_and}
-                for book in self.allotment:
-                    if set(incl_and).issubset(book[SHELVES]):
-                        for shelf_name in incl_and:
-                            self.grouped[shelf_name].append(book)
-                return
-
-            if incl_or:
-                self.grouped = {shelf_name: list() for shelf_name in incl_or}
-                for book in self.allotment:
-                    for shelf_name in book[SHELVES]:
-                        if shelf_name in incl_or:
-                            self.grouped[shelf_name].append(book)
-                return
-
-            if excl:
-                for book in self.allotment:
-                    if not set(excl).intersection(set(book[SHELVES])):
-                        for shelf_name in book[SHELVES]:
-                            val = self.grouped.get(shelf_name, list())
-                            val.append(book)
-                            self.grouped[shelf_name] = val
-                return
-
-            self.grouped = {shelf_name: list() for shelf_name in self.shelf_names}
-            for book in self.allotment:
-                for shelf_name in book[SHELVES]:
-                    self.grouped[shelf_name].append(book)
-            return
-
         if incl_and:
             self.allotment = list(filter(lambda b: set(incl_and).issubset(b[SHELVES]), self.allotment))
         elif incl_or:
             self.allotment = list(filter(lambda b: set(incl_or).intersection(b[SHELVES]), self.allotment))
         elif excl:
             self.allotment = list(filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment))
+        self.fill_in_grouped()
+
+    # def fill_in_grouped(self, incl_and=(), incl_or=(), excl=(), by_shelf=False):
+    #     assert type(incl_and) is tuple and type(incl_or) is tuple and type(excl) is tuple, "wrong type of argument"
+    #
+    #     if by_shelf:
+    #
+    #         if incl_and:
+    #             self.grouped = {shelf: list() for shelf in incl_and}
+    #             for book in self.allotment:
+    #                 if set(incl_and).issubset(book[SHELVES]):
+    #                     for shelf_name in incl_and:
+    #                         self.grouped[shelf_name].append(book)
+    #             return
+    #
+    #         if incl_or:
+    #             self.grouped = {shelf_name: list() for shelf_name in incl_or}
+    #             for book in self.allotment:
+    #                 for shelf_name in book[SHELVES]:
+    #                     if shelf_name in incl_or:
+    #                         self.grouped[shelf_name].append(book)
+    #             return
+    #
+    #         if excl:
+    #             for book in self.allotment:
+    #                 if not set(excl).intersection(set(book[SHELVES])):
+    #                     for shelf_name in book[SHELVES]:
+    #                         val = self.grouped.get(shelf_name, list())
+    #                         val.append(book)
+    #                         self.grouped[shelf_name] = val
+    #             return
+    #
+    #         self.grouped = {shelf_name: list() for shelf_name in self.shelf_names}
+    #         for book in self.allotment:
+    #             for shelf_name in book[SHELVES]:
+    #                 self.grouped[shelf_name].append(book)
+    #         return
+
+    def fill_in_grouped(self):
+        self.grouped = dict()
+        for book in self.allotment:
+            for shelf_name in book[SHELVES]:
+                shelf = self.grouped.get(shelf_name, list())
+                if book not in shelf:
+                    shelf.append(book)
+                    self.grouped[shelf_name] = shelf
+        return
 
     def find_total_mean(self, rubric):
         total_mean = find_mean(self.allotment, rubric)

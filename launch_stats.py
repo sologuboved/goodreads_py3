@@ -11,13 +11,13 @@ Filtering:
 
 # stats.filter_by_range((NUM_PAGES, 200, 300), (NUM_RATINGS, 1000, float('inf')))
 # stats.filter_by_date((DATE_STARTED, 2016, 2017), (DATE_READ, 2017, 2017))
-#
-# stats.filter_by_shelves(by_shelf=True)
+
+# stats.filter_by_shelves(incl_and=(READ, PHILOSOPHY, POETICS_AND_LINGUISTICS))
 
 # to_excl = tuple(set(MY_SHELF_NAMES) - {READ, PHILOSOPHY, POETICS_AND_LINGUISTICS, DEIGMA})
-# stats.filter_by_shelves(excl=to_excl, by_shelf=True)
+# stats.filter_by_shelves(excl=to_excl)
 
-# stats.filter_by_shelves(incl_or=(DEIGMA,), by_shelf=True)
+stats.filter_by_shelves(incl_or=(DEIGMA, ANTIQUITY))
 
 """
 Printing allotments:
@@ -25,7 +25,7 @@ Printing allotments:
 
 # prettyprint_allotment(stats.allotment)  # whole
 
-# prettyprint_allotment(stats.grouped)  # grouped into shelves
+prettyprint_allotment(stats.grouped)  # grouped into shelves
 
 
 """
