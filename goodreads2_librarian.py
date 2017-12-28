@@ -110,7 +110,7 @@ class Librarian(object):
             for rubric in (NUM_PAGES, NUM_RATINGS, AVG_RATING):
                 book[rubric] = self.process_val(self.convert_to_float, book[rubric])
 
-            for rubric in (DATE_PUB, DATE_ADDED, DATE_STARTED, DATE_READ):
+            for rubric in (DATE_PUB, DATE_PUB_ED, DATE_ADDED, DATE_STARTED, DATE_READ):
                 book[rubric] = self.process_val(self.convert_date, book[rubric])
 
             book[MY_RATING] = self.process_val(self.convert_rating, book[MY_RATING])

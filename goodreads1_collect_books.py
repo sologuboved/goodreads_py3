@@ -32,7 +32,7 @@ class GoodreadsBooks(object):
                 print()
             for raw_book in self.shelves[shelf]:
                 book = {rubric: raw_book[rubric] for rubric in raw_book}
-                book_key = book[AUTHOR] + ' -- ' + book[TITLE]
+                book_key = "%r -- %r -- %r" % (book[AUTHOR], book[TITLE], book[DATE_PUB_ED])
                 if self.printer_on:
                     print(book_key, end=' ')
                 readymade_entry = books.get(book_key)
@@ -63,5 +63,5 @@ if __name__ == '__main__':
     pass
     # GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=True)
     # books = GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=False).books
-    GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=False).dump_books_and_shelf_names()
+    GoodreadsBooks(MY_SHELVES_JSON, MY_BOOKS_JSON, MY_SHELF_NAMES_JSON, printer_on=True).dump_books_and_shelf_names()
     # GoodreadsBooks(A_SHELVES_JSON, A_BOOKS_JSON, A_SHELF_NAMES_JSON).dump_books_and_shelf_names()

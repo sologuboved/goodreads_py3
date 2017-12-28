@@ -21,6 +21,7 @@ NUM_PAGES = 'num_pages'
 AVG_RATING = 'avg_rating'
 NUM_RATINGS = 'num_ratings'
 DATE_PUB = 'date_pub'
+DATE_PUB_ED = 'date_pub_edition'
 MY_RATING = 'rating'
 DATE_STARTED = 'date_started'
 DATE_READ = 'date_read'
@@ -34,6 +35,7 @@ RUBRICS = [TITLE,
            AVG_RATING,
            NUM_RATINGS,
            DATE_PUB,
+           DATE_PUB_ED,
            MY_RATING,
            DATE_STARTED,
            DATE_READ,
