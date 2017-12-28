@@ -32,11 +32,11 @@ Printing allotments:
 Calculations:
 """
 
-# print(find_mean(stats.allotment, NUM_PAGES))
+# stats.find_total_mean(NUM_PAGES)
 # stats.find_mean_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
 # stats.find_est_books(rubric=TIME_GAP, large_to_small=True, num_books=10, by_shelf=True)
-# print("Variance", find_variance(stats.allotment, NUM_PAGES))
-# print("Standard Deviation", find_sd(stats.allotment, NUM_PAGES))
+# stats.find_total_variance(NUM_PAGES)
+# stats.find_total_sd(NUM_PAGES)
 # stats.find_variance_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
 # stats.find_sd_per_shelf(rubric=NUM_PAGES, alpha=False, large_to_small=True)
 

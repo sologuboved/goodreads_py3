@@ -11,6 +11,7 @@ class Stats(Librarian):
         super(Stats, self).__init__(books_json, shelf_names_json)
         self.time_books()
         self.grouped = dict()
+        self.filter_by_shelves()
 
     def time_books(self):
         for book in self.allotment:
@@ -76,10 +77,15 @@ class Stats(Librarian):
         elif excl:
             self.allotment = list(filter(lambda b: not set(excl).intersection(b[SHELVES]), self.allotment))
 
+    def find_total_mean(self, rubric):
+        total_mean = find_mean(self.allotment, rubric)
+        print('\nMean:\n', total_mean)
+        return total_mean
+
     def find_mean_per_shelf(self, rubric, alpha=False, large_to_small=True):
         assert self.grouped, "Shelved allotment is empty"
         means = {shelf_name: find_mean(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
-        print('\nMean:\n')
+        print('\nMean per shelf:\n')
         print_sorted_res(means, alpha, large_to_small)
         print()
         return means
@@ -98,18 +104,28 @@ class Stats(Librarian):
             sort_books(self.allotment, rubric, large_to_small)
             prettyprint_allotment(self.allotment, num_books, rubric)
 
+    def find_total_variance(self, rubric):
+        total_variance = find_variance(self.allotment, rubric)
+        print('\nVariance:\n', total_variance)
+        return total_variance
+
     def find_variance_per_shelf(self, rubric, alpha=False, large_to_small=True):
         assert self.grouped, "Shelved allotment is empty"
         variances = {shelf_name: find_variance(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
-        print('\nVariance:\n')
+        print('\nVariance per shelf:\n')
         print_sorted_res(variances, alpha, large_to_small)
         print()
         return variances
 
+    def find_total_sd(self, rubric):
+        total_sd = find_sd(self.allotment, rubric)
+        print('\nStandard Deviation:\n', total_sd)
+        return total_sd
+
     def find_sd_per_shelf(self, rubric, alpha=False, large_to_small=True):
         assert self.grouped, "Shelved allotment is empty"
         sds = {shelf_name: find_sd(self.grouped[shelf_name], rubric) for shelf_name in self.grouped}
-        print("\nStandard Deviation:\n")
+        print("\nStandard Deviation per shelf:\n")
         print_sorted_res(sds, alpha, large_to_small)
         print()
         return sds
