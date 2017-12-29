@@ -34,7 +34,7 @@ Calculations:
 """
 
 # stats.find_total_mean(SPEED)
-stats.find_mean_per_shelf(rubric=SPEED, alpha=False, large_to_small=False)
+# stats.find_mean_per_shelf(rubric=SPEED, alpha=False, large_to_small=False)
 # stats.find_est_books(rubric=TIME_GAP, large_to_small=True, num_books=10, by_shelf=True)
 # stats.find_total_variance(NUM_PAGES)
 # stats.find_total_sd(NUM_PAGES)
