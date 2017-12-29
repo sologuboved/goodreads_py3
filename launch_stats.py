@@ -17,7 +17,8 @@ Filtering:
 # to_excl = tuple(set(MY_SHELF_NAMES) - {READ, PHILOSOPHY, POETICS_AND_LINGUISTICS, DEIGMA})
 # stats.filter_by_shelves(excl=to_excl)
 
-stats.filter_by_shelves(incl_or=(DEIGMA, ANTIQUITY))
+# stats.filter_by_shelves(incl_or=(DEIGMA, ANTIQUITY))
+
 
 """
 Printing allotments:
@@ -25,7 +26,7 @@ Printing allotments:
 
 # prettyprint_allotment(stats.allotment)  # whole
 
-prettyprint_allotment(stats.grouped)  # grouped into shelves
+# prettyprint_allotment(stats.grouped)  # grouped into shelves
 
 
 """
@@ -33,12 +34,12 @@ Calculations:
 """
 
 # stats.find_total_mean(NUM_PAGES)
-# stats.find_mean_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
+stats.find_mean_per_shelf(rubric=SPEED, alpha=False, large_to_small=False)
 # stats.find_est_books(rubric=TIME_GAP, large_to_small=True, num_books=10, by_shelf=True)
 # stats.find_total_variance(NUM_PAGES)
 # stats.find_total_sd(NUM_PAGES)
-# stats.find_variance_per_shelf(rubric=NUM_PAGES, alpha=True, large_to_small=False)
-# stats.find_sd_per_shelf(rubric=NUM_PAGES, alpha=False, large_to_small=True)
+# stats.find_variance_per_shelf(rubric=SPEED, alpha=True, large_to_small=False)
+# stats.find_sd_per_shelf(rubric=SPEED, alpha=False, large_to_small=True)
 
 
 """

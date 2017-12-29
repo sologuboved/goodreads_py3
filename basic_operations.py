@@ -162,10 +162,21 @@ def sort_books(allotment, rubric, large_to_small):
 
 
 def print_sorted_res(results, alpha=False, large_to_small=True):
+    nones = list()
+    clean = list()
+    for shelf_name in results:
+        value = results[shelf_name]
+        result = (shelf_name, value)
+        if value is None:
+            nones.append(result)
+        else:
+            clean.append(result)
     if alpha:
-        sorted_results = sorted(results.items(), key=lambda b: b[0], reverse=large_to_small)
+        ind = 0
     else:
-        sorted_results = sorted(results.items(), key=lambda b: b[1], reverse=large_to_small)
+        ind = 1
+    sorted_results = sorted(clean, key=lambda b: b[ind], reverse=large_to_small)
+    sorted_results += sorted(nones, key=lambda s: s[0], reverse=large_to_small)
     for result in sorted_results:
         print(result[0], end=' ')
         print(':', result[1])
@@ -173,9 +184,13 @@ def print_sorted_res(results, alpha=False, large_to_small=True):
 
 def find_variance(allotment, rubric):
     suitable_vals = list(find_suitable_vals(allotment, rubric))
-    mean = sum(suitable_vals) / len(suitable_vals)
-    return sum([(suitable_val - mean) ** 2 for suitable_val in suitable_vals]) / len(suitable_vals)
+    if suitable_vals:
+        mean = sum(suitable_vals) / len(suitable_vals)
+        return sum([(suitable_val - mean) ** 2 for suitable_val in suitable_vals]) / len(suitable_vals)
 
 
 def find_sd(allotment, rubric):
-    return sqrt(find_variance(allotment, rubric))
+    try:
+        return sqrt(find_variance(allotment, rubric))
+    except TypeError:
+        return
