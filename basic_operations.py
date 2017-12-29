@@ -138,7 +138,7 @@ def find_book_speed(book, rounded=False):
     # pages per day
     try:
         if rounded:
-            return floor(book[NUM_PAGES] / book[TIME_DELTA])
+            return float(floor(book[NUM_PAGES] / book[TIME_DELTA]))
         return book[NUM_PAGES] / book[TIME_DELTA]
     except TypeError:
         return
