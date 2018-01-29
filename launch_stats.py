@@ -24,7 +24,7 @@ Filtering:
 Printing allotments:
 """
 
-# prettyprint_allotment(stats.allotment)  # whole
+prettyprint_allotment(stats.allotment)  # whole
 
 # prettyprint_allotment(stats.grouped)  # grouped into shelves
 

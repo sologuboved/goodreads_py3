@@ -138,4 +138,5 @@ if __name__ == '__main__':
     # good_librarian = Librarian(A_BOOKS_JSON, A_SHELF_NAMES_JSON)
     # print len(good_librarian.allotment)
     # print load_json(A_BOOKS_JSON)[19]
-    good_librarian.find_unshelved_books()
+    prettyprint_allotment(good_librarian.allotment)
+    # good_librarian.find_unshelved_books()
