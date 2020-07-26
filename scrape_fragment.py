@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from basic_operations import prettyprint_book
+from helpers import prettyprint_book
 from global_vars import *
 
 

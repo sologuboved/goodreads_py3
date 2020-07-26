@@ -1,11 +1,11 @@
-from basic_operations import load_json
+from helpers import load_utf_json
 from global_vars import TITLE, SHELVES
-from basic_operations import prettyprint_allotment
+from helpers import prettyprint_allotment
 
 
 def compare(old_json, new_json):
-    old = load_json(old_json)
-    new = load_json(new_json)
+    old = load_utf_json(old_json)
+    new = load_utf_json(new_json)
     common_titles = list()
     pairs = list()
     for old_book in old:

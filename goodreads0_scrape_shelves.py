@@ -3,7 +3,7 @@
 import html
 import requests
 from bs4 import BeautifulSoup
-from basic_operations import *
+from helpers import *
 
 
 class Scraping(object):
@@ -159,7 +159,7 @@ class Scraping(object):
 
     def dump_shelves(self):
         print("Dumping shelves...")
-        dump_json(self.shelves, self.shelves_json)
+        dump_utf_json(self.shelves, self.shelves_json)
 
 
 if __name__ == '__main__':

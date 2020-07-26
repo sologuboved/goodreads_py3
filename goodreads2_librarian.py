@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from basic_operations import *
+from helpers import *
 
 
 class Librarian(object):
     def __init__(self, books_json, shelf_names_json):
         self.errors = set()  # from self.process_books
-        self.allotment = self.process_books(load_json(books_json))
-        self.shelf_names = load_json(shelf_names_json)
+        self.allotment = self.process_books(load_utf_json(books_json))
+        self.shelf_names = load_utf_json(shelf_names_json)
         print("Errors:")
         if self.errors:
             for error in self.errors:

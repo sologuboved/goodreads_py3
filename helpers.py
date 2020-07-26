@@ -5,14 +5,14 @@ from math import floor, sqrt
 from global_vars import *
 
 
-def load_json(json_file):
-    with open(json_file) as data:
+def load_utf_json(json_file):
+    with open(json_file, encoding='utf8') as data:
         return json.load(data)
 
 
-def dump_json(entries, json_file):
-    with open(json_file, 'w') as handler:
-        json.dump(entries, handler)
+def dump_utf_json(entries, json_file):
+    with open(json_file, 'w', encoding='utf-8') as handler:
+        json.dump(entries, handler, ensure_ascii=False, sort_keys=True, indent=2)
 
 
 def print_scraped_rubrics(cells):
@@ -108,12 +108,12 @@ def deep_copy(multi):
 def update_book_shelves(json_file, title, upd_shelves):
     # Change the contents of shelves rubric in the json file
     assert type(upd_shelves) is list, "upd_shelves must be of type list"
-    library = load_json(json_file)
+    library = load_utf_json(json_file)
     print("Loaded allotment")
     for book in library:
         if book[TITLE] == title:
             book[SHELVES] = upd_shelves[:]
-            dump_json(library, json_file)
+            dump_utf_json(library, json_file)
             print("Dumped updated allotment")
             return
     print(title, 'not found!')

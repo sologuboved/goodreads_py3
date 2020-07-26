@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from basic_operations import *
+from helpers import *
 
 
 class GoodreadsBooks(object):
@@ -9,7 +9,7 @@ class GoodreadsBooks(object):
         self.books_json = books_json
         self.shelf_names_json = shelf_names_json
         self.printer_on = printer_on
-        self.shelves = load_json(self.shelves_json)
+        self.shelves = load_utf_json(self.shelves_json)
         self.shelf_names = sorted(self.shelves.keys())
         self.books = self.collect_books()
 
@@ -54,9 +54,9 @@ class GoodreadsBooks(object):
 
     def dump_books_and_shelf_names(self):
         print("Dumping books...")
-        dump_json(self.books, self.books_json)
+        dump_utf_json(self.books, self.books_json)
         print("Dumping shelf names...")
-        dump_json(self.shelf_names, self.shelf_names_json)
+        dump_utf_json(self.shelf_names, self.shelf_names_json)
 
 
 if __name__ == '__main__':
