@@ -29,5 +29,5 @@ def process_booklist(src_json, target_txt):
 
 if __name__ == '__main__':
     json_fname = 'raw_booklist.json'
-    download_raw_booklist('https://www.goodreads.com/list/show/148119.Conspirologic?page={}', 2, json_fname)
-    # process_booklist(json_fname, 'booklist.txt')
+    # download_raw_booklist('https://www.goodreads.com/list/show/148119.Conspirologic?page={}', 2, json_fname)
+    process_booklist(json_fname, 'booklist.txt')
