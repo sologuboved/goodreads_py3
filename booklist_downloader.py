@@ -22,7 +22,7 @@ def process_booklist(src_json, target_txt):
     with open(target_txt, 'wt') as handler:
         handler.write('<ol>')
         for author_name, title, title_url in load_utf_json(src_json):
-            handler.write('<li><a href="{}">{} - {}</a></li>\n'.format('https://www.goodreads.com' + title_url,
+            handler.write('<li><a href="{}">{} - {}</a></li>'.format('https://www.goodreads.com' + title_url,
                                                                        author_name, title))
         handler.write('</ol>')
 
